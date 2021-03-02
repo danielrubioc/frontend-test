@@ -1,0 +1,29 @@
+<div class="ui-breadcrumb">
+    <ul class="global-breadcrumb" >
+        <li *ngFor="let category of categories; let i = index;let last = last;">
+            {{category}} <span *ngIf="!last"> > </span>
+        </li>
+    </ul>
+</div>
+
+<div class="detail-item">
+    <div class="col container-text"> 
+        <div class="contain-img">
+            <img src="{{data.item.picture}}" > 
+        </div>
+        <div class="wrapper-text">
+            <h2>Descripción del producto</h2>
+            <p>{{data.item.description}}</p>
+        </div>
+    </div>
+    <div class="col container-price">
+        <div class="wrapper-text text-align-left">
+            <p>{{data.item.condition}} - {{data.item.sold_quantity}} Vendidos</p>
+            <h2>{{data.item.title}}</h2>    
+            <p class="price">{{data.item.price.amount}}</p>
+            <div class="action_container">
+                <a href="" class="add-to-cart"> Comprar</a>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,22 @@
+<div class="search-result">
+    <div class="ui-breadcrumb">
+        <ul class="global-breadcrumb" >
+            <li *ngFor="let category of categories; let i = index;let last = last;">
+                {{category}} <span *ngIf="!last"> > </span>
+            </li>
+        </ul>
+    </div>
+    <ul class="list-item">
+        <li *ngFor="let item of items; index as i; first as isFirst">
+            <div class="card-item">
+                <div class="image-item">
+                    <img [src]="item['picture']" alt="">
+                </div>
+                <div class="content-wrapper">
+                    <p class="price">{{item['price']['amount']}}</p>
+                    <a [routerLink]="['/items/', item['id']]"><h2>{{item['title']}}</h2></a> 
+                </div> 
+            </div>
+        </li>
+    </ul> 
+</div>

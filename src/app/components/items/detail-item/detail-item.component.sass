@@ -1,0 +1,65 @@
+.ui-breadcrumb
+    font-family: Proxima Nova,-apple-system,Helvetica Neue,Helvetica,Roboto,Arial,sans-serif
+    font-size: 14px
+    padding: 0 
+    margin: 15px 0 
+
+    .global-breadcrumb
+        margin: 0 0 16px
+        font-weight: 400
+        line-height: 1.45
+        list-style: none
+        
+        li
+            display: inline
+                
+.detail-item 
+    display: -webkit-flex
+    display: flex
+    -webkit-flex: 0 1 0%
+    flex: 0 1 0%
+    -webkit-flex-direction: row
+    flex-direction: row
+    flex-wrap: wrap
+    background: #ffff
+    padding: 50px
+
+    .col
+        -webkit-flex-grow: 1
+        flex-grow: 1
+        -webkit-flex-shrink: 1
+        flex-shrink: 1
+        -webkit-flex-basis: 0%
+        flex-basis: 0%
+        
+        &.container-text
+            flex-grow: 3
+            flex-shrink: 1
+            padding: 0 25px 0 16px
+            border-radius: 8px
+
+            .contain-img  
+                text-align: center
+
+        &.container-price 
+            
+            .add-to-cart
+                background: antiquewhite
+                border-color: transparent
+                background-color: #3483fa
+                color: #fff
+                font-family: Proxima Nova,-apple-system,Helvetica Neue,Helvetica,Roboto,Arial,sans-serif
+                font-size: 16px
+                font-weight: 600
+                line-height: 48px 
+                height: 48px
+                text-align: center
+                border-radius: 6px
+                -webkit-transition: .18s ease-out
+                transition: .18s ease-out
+                -webkit-transition-property: background,color
+                transition-property: background,color
+                display: inline-block
+                width: auto
+                -webkit-font-smoothing: antialiased
+                width: 100%
