@@ -57,7 +57,7 @@ app.get('/api/items', async (req, res, next)  => {
     }
       
 
-    httpRequest(options).then(response => {
+    await httpRequest(options).then(response => {
         let items = []; 
         let categories = [];
         let category_most_frecuently = '';
@@ -85,35 +85,35 @@ app.get('/api/items', async (req, res, next)  => {
                     categories[item.category_id] ++
                 } else {
                     categories[item.category_id] = 0
-                }  
-
+                }   
             });
             
             return_response.items = items;
             categories.sort();
             category_most_frecuently = Object.keys(categories)[0];
-            options.path = '/categories/'+category_most_frecuently 
-
-            httpRequest(options).then(response => {
-                categories = [];
-                response.path_from_root.map((category) => { 
-                    categories.push(category.name);
-                }) 
-                return_response.categories = categories;
-
-                res.json(return_response);
-
-            }).catch(error => console.error(error));  
-        }
-        
+            options.path = '/categories/'+category_most_frecuently;
+        } 
 
     }).catch(error => console.error(error));
  
+    await httpRequest(options).then(response => {
+        categories = [];
+        response.path_from_root.map((category) => { 
+            categories.push(category.name);
+        }) 
+
+        return_response.categories = categories; 
+
+    }).catch(error => console.error(error));  
+ 
+    res.json(return_response);
+
 }); 
  
 
 app.get("/api/items/:id", async (req, res, next) => {
     let params = req.params; 
+    let category = "";
     let return_response = {
         "author": { "name": "Daniel", "lastname": "Rubio"},
         "item" : {},
@@ -122,29 +122,12 @@ app.get("/api/items/:id", async (req, res, next) => {
     let options = { 
         hostname: 'api.mercadolibre.com',
         port: 443,
-        path: '/items/',
+        path: '/items/'+params.id,
         method: 'GET', 
-    };
-    let options2 = { 
-        hostname: 'api.mercadolibre.com',
-        port: 443,
-        path: '/items/',
-        method: 'GET', 
-    };
-    let options3 = { 
-        hostname: 'api.mercadolibre.com',
-        port: 443,
-        path: '/items/',
-        method: 'GET', 
-    };
-    
-    if('id' in params) {
-        options.path = '/items/'+params.id; 
-        options2.path = '/items/' + params.id + '/description'; 
-    }
- 
+    };  
+
     await httpRequest(options).then( response => { 
-        options3.path = '/categories/'+response.category_id;
+        category = response.category_id;
         return_response.item = {
             "id":  response.id,
             "title": response.title,
@@ -157,16 +140,18 @@ app.get("/api/items/:id", async (req, res, next) => {
             "condition": response.condition,
             "free_shipping": response.shipping.free_shipping,
             "sold_quantity": response.sold_quantity
-        }  
-    })
-     
-    await httpRequest(options2).then( response => {
-        return_response.item.description = response.plain_text; 
-    })
+        } 
+    }).catch(error => console.error(error)); 
 
-    await httpRequest(options3).then( response => { 
+    options.path = '/items/' + params.id + '/description';  
+    await httpRequest(options).then( response => {
+        return_response.item.description = response.plain_text; 
+    }).catch(error => console.error(error)); 
+
+    options.path = '/items/' + category + '/description'; 
+    await httpRequest(options).then( response => { 
         return_response.categories = response.path_from_root;  
-    })
+    }).catch(error => console.error(error)); 
 
     res.json(return_response); 
 }) 
