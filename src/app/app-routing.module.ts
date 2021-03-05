@@ -3,18 +3,27 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 // Import all the components for which navigation
-import { ListItemComponent } from './components/items/list-item/list-item.component';
-import { DetailItemComponent } from './components/items/detail-item/detail-item.component'; 
+import { ListItemComponent } from './modules/items/list-item/list-item.component';
+import { DetailItemComponent } from './modules/items/detail-item/detail-item.component'; 
+
+import { RouteResolver } from './resolvers/resolver.by.id.service';
+import { RouteResolverItems } from './resolvers/resolver.all.services';
 
 
 const routes: Routes = [
   {
     path: 'items', 
-    component: ListItemComponent
+    component: ListItemComponent,
+    resolve:{
+      routeResolver: RouteResolverItems
+    }
   },
   {
     path: 'items/:id',
-    component: DetailItemComponent
+    component: DetailItemComponent,
+    resolve: {
+      routeResolver: RouteResolver
+    },
   },
   { 
     path: '**', 
@@ -24,6 +33,7 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  providers: [RouteResolver,RouteResolverItems]
 })
 export class AppRoutingModule { }

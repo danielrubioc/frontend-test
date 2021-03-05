@@ -4,11 +4,12 @@
             <a href="/" class="nav-logo"></a>
             <form class="form-search" action="items?" method="get">
                 <input type="text" formControlName=search name="search" placeholder="Nunca dejes de buscar"> 
-                <button type="submit" class="nav-search-btn" tabindex="4"><div role="img" aria-label="Buscar" class="nav-icon-search"></div></button>
+                <button type="submit" class="nav-search-btn" tabindex="4"><span class="material-icons md-18">search</span>
+                </button>
             </form>
         </div> 
     </nav>
 </header>
 <div class="contain">
-    <router-outlet></router-outlet>
+    <router-outlet></router-outlet> 
 </div>
