@@ -2,12 +2,12 @@
   "name": "frontend-test",
   "version": "0.0.0",
   "scripts": {
-    "ng": "ng",
-    "start": "ng serve",
+    "ng": "ng", 
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e", 
+    "start": "concurrently \"ng serve\" \"node ./api/index.js\""
   },
   "private": true,
   "dependencies": {
@@ -19,6 +19,7 @@
     "@angular/platform-browser": "~11.2.3",
     "@angular/platform-browser-dynamic": "~11.2.3",
     "@angular/router": "~11.2.3",
+    "concurrently": "^6.0.0",
     "express": "^4.17.1",
     "rxjs": "~6.6.0",
     "rxjs-compat": "^6.6.6",

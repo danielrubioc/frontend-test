@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -9,12 +11,17 @@ export class AppComponent {
   title = 'frontend-test'; 
   childCurrentValue:any;
   categoriesBreadCrumbs:any;
+  searchForm = this.formBuilder.group({
+    search: ''
+  })
 
-  onActivate(selected:any) { 
-    selected.categoriesToParent.subscribe((data:any) => { 
-      this.categoriesBreadCrumbs = data;
-    })
+  constructor(
+    private formBuilder: FormBuilder,
+    private router: Router,
+    private route: ActivatedRoute,
+  ) {} 
+
+  onSubmit(): void { 
+    this.router.navigate(['items'], {queryParams: {search: this.searchForm.value.search}}); 
   }
-
-
 }

@@ -1,7 +1,7 @@
 <div class="ui-breadcrumb">
     <ul class="global-breadcrumb" >
         <li *ngFor="let category of categories; let i = index;let last = last;">
-            <a href="/items?category={{category['id']}}">{{category['name']}}</a> <span *ngIf="!last"> > </span>
+            <a [routerLink]="['/items/']" [queryParams]="{category: category['id']}">{{category['name']}}</a> <span *ngIf="!last"> > </span>
         </li>
     </ul>
 </div>

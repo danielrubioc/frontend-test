@@ -1,11 +1,10 @@
 <header>
     <nav>
         <div class="nav-menu">
-            <a href="/" class="nav-logo"></a>
-            <form class="form-search" action="items?" method="get">
+            <a [routerLink]="['/']" class="nav-logo"></a>
+            <form class="form-search" [formGroup]="searchForm" (ngSubmit)="onSubmit()">
                 <input type="text" formControlName=search name="search" placeholder="Nunca dejes de buscar"> 
-                <button type="submit" class="nav-search-btn" tabindex="4"><span class="material-icons md-18">search</span>
-                </button>
+                <button type="submit" class="nav-search-btn" tabindex="4"><span class="material-icons md-18">search</span></button>
             </form>
         </div> 
     </nav>
